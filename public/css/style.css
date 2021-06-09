@@ -1,8 +1,8 @@
 /* COMMON */
 :root {
-  --color-primary: #000000;
-  --color-primary-hover: #cca351;
-  --color-primary-transparent: #a07f3d;
+  --color-primary: #64BBE3;
+  --color-primary-hover: #85CAE9;
+  --color-primary-transparent: #B8E0F2;
 }
 
 body {
@@ -280,7 +280,7 @@ section.contact .social-media a {
 
 /* FOOTER */
 footer {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-transparent);
   padding: 3rem;
   text-align: center;
   width: 70%;
