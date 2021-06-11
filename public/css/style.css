@@ -2,7 +2,7 @@
 :root {
   --color-primary: #64BBE3;
   --color-primary-hover: #85CAE9;
-  --color-primary-transparent: #B8E0F2;
+  --color-primary-transparent: #b8e0f2a2;
 }
 
 body {
@@ -127,7 +127,7 @@ nav.navbar {
   background-color: var(--color-primary);
   padding: 1rem;
   font-size: 1.5rem;
-  color: rgb(111, 225, 250);
+  color:black;
   text-decoration: none;
   border-radius: 50%;
 }
@@ -280,11 +280,11 @@ section.contact .social-media a {
 
 /* FOOTER */
 footer {
-  background-color: var(--color-primary-transparent);
+  background-color: var(--color-primary);
   padding: 3rem;
   text-align: center;
   width: 70%;
-  color: rgb(196, 196, 196);
+  color: rgb(138, 137, 137);
 }
 
 @media (max-width: 992px) {
@@ -294,11 +294,11 @@ footer {
 }
 
 footer a {
-  color: rgb(196, 196, 196);
+  color: rgb(156, 155, 155);
 }
 
 footer a:hover {
-  color: rgb(241, 241, 241);
+  color: rgb(153, 152, 152);
 }
 /* FOOTER */
 
