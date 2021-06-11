@@ -6,13 +6,10 @@
 }
 
 body {
-  font-family: "Montserrat";
+  font-family: Arial, Helvetica, sans-serif;
   position: relative;
 }
-.deneme {
-  color: yellow;
-  font-weight: 900;
-}
+
 a:hover {
   color: var(--color-primary);
 }
@@ -20,6 +17,7 @@ a:hover {
 .section-header {
   text-align: center;
   margin-bottom: 1rem;
+
 }
 
 .section-header h2 {
@@ -41,6 +39,35 @@ a:hover {
   background-color: var(--color-primary);
   transform: translate(-50%, 50%);
 }
+
+.section-biz .misyonumuz h3{
+  border-top: 1px dotted var(--color-primary);
+  border-bottom: 1px dotted var(--color-primary);
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 2rem;
+  position: relative;
+ 
+}
+
+
+.section-biz .vizyonumuz h3{
+  border-top: 1px dotted var(--color-primary);
+  border-bottom: 1px dotted var(--color-primary);
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 2rem;
+  position: relative;
+ 
+}
+
+.section-biz .container{
+  text-align: center;
+}
+.section-biz .container p{
+  text-align: left;
+}
+
 
 /* COMMON */
 
