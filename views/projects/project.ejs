@@ -8,7 +8,6 @@
       role="tabpanel"
     >
       <div class="row g-3">
-        <!-- FOREACH BASLANGIC YERİ -->
         <% data.forEach(function(item){ %>
         <div
           style="max-width: 200px"
@@ -29,149 +28,158 @@
         >
           <!-- Button trigger modal -->
 
-          <button
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#<%=item.projeYeri%>"
-          >
+          <button type="button" data-bs-toggle="modal" data-bs-target="#deneme">
             <div
               class="
                 d-flex
                 flex-column
                 align-items-center
                 justify-content-center
+                hepsi
               "
+              data-title="<%=item.title%>"
+              data-description="<%=item.description%>"
+              data-musteri="<%=item.musteri%>"
+              data-projeyeri="<%=item.projeYeri%>"
+              data-projetipi="<%=item.projeTipi%>"
+              data-resim1="<%=item.resimler.bir%>"
+              data-resim2="<%=item.resimler.iki%>"
+              data-resim3="<%=item.resimler.uc%>"
+              data-resim4="<%=item.resimler.dort%>"
             >
               <img
                 src="<%=item.resimler.bir%>"
                 alt="Rolling Roof"
-                class="rounded shadow"
+                class="rounded shadow firstpicture"
                 style="max-height: 200px; max-width: 150px"
               />
               <div class="my-2 h5 w-75"><%=item.title%></div>
             </div>
           </button>
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="<%=item.projeYeri%>"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content" style="height: 70vh">
-                <div class="modal-header">
-                  <button
-                    type="button"
-                    class="btn-close bg-white"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                  <div class="">
-                    <div class="row">
-                      <div class="col-md-4 d-flex flex-wrap">
-                        <div class="col-sm-12">
-                          <h3 class="text-center">İLGİLİ GÖRSELLER</h3>
-                        </div>
+        </div>
+        <!-- Modal -->
+        <% }) %>
+        <div
+          class="modal fade"
+          id="deneme"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content" style="max-height: 70vh">
+              <div class="modal-header">
+                <button
+                  type="button"
+                  class="btn-close bg-white kapat"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body d-flex align-items-center">
+                <div class="">
+                  <div class="row">
+                    <div class="col-md-4 d-flex flex-wrap">
+                      <div class="col-sm-12">
+                        <h3 class="text-center">İLGİLİ GÖRSELLER</h3>
+                      </div>
 
-                        <div class="col-sm-6">
-                          <div
-                            class="
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              p-2
-                            "
-                          >
-                            <img
-                              height="200"
-                              width="100%"
-                              class="rounded"
-                              src="<%=item.resimler.bir%>"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div
-                            class="
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              p-2
-                            "
-                          >
-                            <img
-                              height="200"
-                              width="100%"
-                              class="rounded"
-                              src="<%=item.resimler.iki%>"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div
-                            class="
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              p-2
-                            "
-                          >
-                            <img
-                              height="200"
-                              width="100%"
-                              class="rounded"
-                              src="<%=item.resimler.uc%>"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                          <div
-                            class="
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              p-2
-                            "
-                          >
-                            <img
-                              height="200"
-                              width="100%"
-                              class="rounded"
-                              src="<%=item.resimler.dort%>"
-                              alt=""
-                            />
-                          </div>
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="200"
+                            width="100%"
+                            class="rounded resim1"
+                            src="1"
+                            alt=""
+                            id="onbir"
+                          />
                         </div>
                       </div>
-                      <div class="col-md-4 pt">
-                        <div class="col-sm-12">
-                          <strong
-                            class="text-center d-flex justify-content-center"
-                          >
-                            <%=item.title%>
-                          </strong>
-                          <p class="mt-5 icerik-yazi"><%=item.content%></p>
-                          <br />
-                          <p class="mt-3 icerik-yazi text-muted">PROJE YERİ:</p>
-                          <p><%=item.projeYeri%></p>
-                          <p class="mt-3 icerik-yazi text-muted">PROJE TİPİ:</p>
-                          <p><%=item.projeTipi%></p>
-                          <p class="mt-3 icerik-yazi text-muted">MÜŞTERİ:</p>
-                          <p><%=item.musteri%></p>
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="200"
+                            width="100%"
+                            class="rounded resim2"
+                            id="oniki"
+                            src="2"
+                            alt=""
+                          />
                         </div>
                       </div>
-                      <!-- KOPYANALAN YER -->
-                      <div class="col-md-4">
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="200"
+                            width="100%"
+                            class="rounded resim3"
+                            id="onuc"
+                            src="3"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="200"
+                            width="100%"
+                            class="rounded resim4"
+                            id="ondort"
+                            src="4"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 pt" style="height: 50px">
+                      <div class="col-sm-12">
+                        <strong
+                          class="text-center d-flex justify-content-center"
+                        >
+                          title
+                        </strong>
+                        <p class="mt-5 icerik-yazi">content</p>
+                        <br />
+                        <p class="mt-3 icerik-yazi text-muted">PROJE YERİ:</p>
+                        <p>projeyeri</p>
+                        <p class="mt-3 icerik-yazi text-muted">PROJE TİPİ:</p>
+                        <p>proje tipi</p>
+                        <p class="mt-3 icerik-yazi text-muted">MÜŞTERİ:</p>
+                        <p>muster</p>
+
                         <div
                           class="
                             col-sm-12
@@ -179,7 +187,7 @@
                             flex-column
                             align-items-center
                             justify-content-center
-                            h-100
+                            h-50
                           "
                         >
                           <P class="my-3">PROJELENDİRME</P>
@@ -255,15 +263,71 @@
                         </div>
                       </div>
                     </div>
+                    <div
+                      class="
+                        col-md-4
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                      "
+                    >
+                      <img
+                        src="1"
+                        alt="Bioclimatic Pergola"
+                        class="büyükresim img-thumbnail"
+                        id="onbes"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <% }) %>
-        <!-- FOREACH BİTİŞ YERİ -->
       </div>
     </div>
   </div>
 </section>
+<script>
+  var butonresim = document.querySelectorAll(".hepsi");
+
+  butonresim.forEach((element) => {
+    var resim1 = element.dataset.resim1;
+    var resim2 = element.dataset.resim2;
+    var resim3 = element.dataset.resim3;
+    var resim4 = element.dataset.resim4;
+
+    element.addEventListener("click", (e) => {
+      var resim1 = document.querySelector(".resim1");
+      var resim2 = document.querySelector(".resim2");
+      var resim3 = document.querySelector(".resim3");
+      var resim4 = document.querySelector(".resim4");
+      var resim5 = document.querySelector(".büyükresim");
+      resim1.src = element.dataset.resim1;
+      resim2.src = element.dataset.resim2;
+      resim3.src = element.dataset.resim3;
+      resim4.src = element.dataset.resim4;
+      resim5.src = element.dataset.resim1;
+      console.log("tiklandı");
+    });
+  });
+
+  var onbir = document.getElementById("onbir");
+  var oniki = document.getElementById("oniki");
+  var onuc = document.getElementById("onuc");
+  var ondort = document.getElementById("ondort");
+  var onbes = document.getElementById("onbes");
+
+  onbir.addEventListener("click", () => {
+    onbes.src = onbir.src;
+  });
+  oniki.addEventListener("click", () => {
+    onbes.src = oniki.src;
+  });
+  onuc.addEventListener("click", () => {
+    onbes.src = onuc.src;
+  });
+  ondort.addEventListener("click", () => {
+    onbes.src = ondort.src;
+  });
+</script>

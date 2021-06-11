@@ -37,6 +37,7 @@
                     type="text"
                     name="title"
                     placeholder="Başlık"
+                    id="title"
                     required
                   />
                 </div>
@@ -49,6 +50,7 @@
                     step="0.01"
                     name="projeTipi"
                     placeholder="projeTipi"
+                    id="projeTipi"
                     required
                   />
                 </div>
@@ -61,6 +63,7 @@
                     step="0.01"
                     name="projeYeri"
                     placeholder="projeYeri"
+                    id="projeYeri"
                     required
                   />
                 </div>
@@ -71,6 +74,7 @@
                     step="0.01"
                     name="musteri"
                     placeholder="musteri"
+                    id="musteri"
                     required
                   />
                 </div>
@@ -81,6 +85,7 @@
                 class="form-control mb-2"
                 name="content"
                 rows="3"
+                id="content"
                 required
               ></textarea>
 
@@ -96,7 +101,6 @@
                 d-flex
                 align-content-between
                 flex-wrap
-                mb-3
               "
             >
               <div>
@@ -122,15 +126,20 @@
                     required
                   />
                 </div>
-                <% if (isSuccess === false ) { %>
-                <div class="alert alert-danger" role="alert"><%=message%></div>
-                <% } %>
+              </div>
+              <div id="alert" class="alert alert-danger d-none" role="alert">
+                <strong>En fazla 4 adet resim yükleyebilirsiniz !</strong>
+              </div>
+              <div id="success" class="alert alert-info d-none" role="alert">
+                <strong id="content2"></strong>
               </div>
               <div class="w-100">
                 <input
-                  class="w-100 btn btn-primary mb-2"
+                  class="w-100 btn btn-info mb-2"
                   type="submit"
                   value="Ekle"
+                  id="imageinput"
+                  disabled
                 />
               </div>
             </div>
@@ -140,3 +149,24 @@
     </main>
   </div>
 </div>
+<script>
+  var resimler = document.getElementById("dosya");
+  var imageinput = document.getElementById("imageinput");
+  var alert = document.getElementById("alert");
+  var content2 = document.getElementById("content2");
+  var deneme11 = document.getElementById("deneme11");
+
+  resimler.addEventListener("change", function (e) {
+    if (e.target.files.length > 4) {
+      alert.classList.remove("d-none");
+      imageinput.disabled = true;
+      success.classList.add("d-none");
+    } else {
+      imageinput.disabled = false;
+      alert.classList.add("d-none");
+      success.classList.remove("d-none");
+      content2.innerHTML = `${e.target.files.length} Adet Resim Başılı Bir Şekilde Seçilmiştir`;
+    }
+    e.preventDefault();
+  });
+</script>
