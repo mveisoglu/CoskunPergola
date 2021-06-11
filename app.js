@@ -160,7 +160,7 @@ app.get("/cikisyap", function (req, res) {
 });
 // ADMIN//
 
-app.post("/admin/proje/ekle", upload.array("dosya", 50), (req, res) => {
+app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
   var resimLinki1 = "";
   var resimLinki2 = "";
   var resimLinki3 = "";
