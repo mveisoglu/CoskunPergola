@@ -3,11 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const passport   = require("passport");
+const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
 const multer = require("multer");
-
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,9 +24,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
-
 //LOGIN İŞLEMLERİ///
-
 
 app.use(
   session({
@@ -39,7 +36,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 ///MONGOOSE///
-
 
 mongoose
   .connect(process.env.MONGO_BAGLANTI, {
@@ -55,7 +51,7 @@ mongoose
     console.log("MONGOOSE HATA", err);
   });
 
-  const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 ///MONGOOSE///
 
 ///MONGOOSE ŞEMA///
@@ -73,11 +69,10 @@ const projeSchema = new mongoose.Schema({
   },
 });
 
-
 // lOGIN SHEMA//
-const uyeSemasi = new mongoose.Schema ({
-  username : String,
-  sifre : String,
+const uyeSemasi = new mongoose.Schema({
+  username: String,
+  sifre: String,
 });
 
 uyeSemasi.plugin(passportLocalMongoose);
@@ -91,12 +86,12 @@ const Proje = mongoose.model("Proje", projeSchema);
 const Kullanici = new mongoose.model("Kullanici", uyeSemasi);
 passport.use(Kullanici.createStrategy());
 //*  TARAYICIDA COOKIE OLUŞTURACAĞIZ.         *//
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 //*  TARAYICIDAN ALDIĞIMIZ COOKİ'İ ÇÖZECEĞİZ' *//
-passport.deserializeUser(function(id, done) {
-  Kullanici.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  Kullanici.findById(id, function (err, user) {
     done(err, user);
   });
 });
@@ -126,10 +121,9 @@ app.post("/api/kullaniciolusturma", function (req, res) {
     req.body.sifre,
     function (err, gelenVeri) {
       if (err) {
-          res.send({ sonuc: "hata" });
-          console.log(err);
-        }
-       else {
+        res.send({ sonuc: "hata" });
+        console.log(err);
+      } else {
         passport.authenticate("local")(req, res, function () {
           res.send({ sonuc: "başarılı" }); //giriş işlemi gerçekleşsin
         });
@@ -138,42 +132,39 @@ app.post("/api/kullaniciolusturma", function (req, res) {
   );
 });
 
-
-
-app.post("/girisyap", function(req, res){
-
+app.post("/girisyap", function (req, res) {
   const kullanici = new Kullanici({
-    username : req.body.username,
-    sifre : req.body.password
+    username: req.body.username,
+    sifre: req.body.password,
   });
-  req.login(kullanici, function(err){
-    if(err){
+  req.login(kullanici, function (err) {
+    if (err) {
       console.log(err);
       res.render("login/giris.ejs");
-    }else {
-      passport.authenticate("local",{ successRedirect: '/admin',
-                                   failureRedirect: '/',
-                                   failureFlash: true })(req,res, function(){
+    } else {
+      passport.authenticate("local", {
+        successRedirect: "/admin",
+        failureRedirect: "/",
+        failureFlash: true,
+      })(req, res, function () {
         res.redirect("/admin");
-    })
+      });
     }
-  })
-})
+  });
+});
 //LOGIN BITIS//
 //LOG OUT//
-app.get("/cikisyap", function(req, res){
+app.get("/cikisyap", function (req, res) {
   req.logout();
   res.redirect("/");
 });
 // ADMIN//
 
-app.post("/admin/proje/ekle", upload.array("dosya", 999), (req, res) => {
+app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
   var resimLinki1 = "";
   var resimLinki2 = "";
   var resimLinki3 = "";
   var resimLinki4 = "";
-
-  console.log("RESİM MİKTARI", req.files.length);
 
   try {
     if (req.files.length > 4) throw "Lütfen En Fazla 4 Adet Resim Ekleyin !";
@@ -223,49 +214,50 @@ app.post("/admin/proje/ekle", upload.array("dosya", 999), (req, res) => {
     });
     ekle.save((err) => {
       if (err) {
-        res.send({ hata: "HATA" });
+        res.redirect("/admin");
       } else {
         res.redirect("/admin");
       }
     });
   } catch (error) {
-    res.render("admin/adminHome", { isSuccess: false, message: error });
+    res.redirect("/admin");
   }
 });
 
-app.get("/admin", (req, res) => {
-  if(req.isAuthenticated()){  // eğer giriş yapılmışsa
+app.get("/admin", async (req, res) => {
+  if (req.isAuthenticated()) {
+    // eğer giriş yapılmışsa
     try {
-      Proje.find({}, (err, gelenVeri) => {
+      await Proje.find({}, (err, gelenVeri) => {
         if (err) throw err;
         else {
           res.render("admin/adminHome", {
             data: gelenVeri,
             isSuccess: true,
-            message: "ok",
+            msg: "ok",
           });
         }
       });
     } catch (error) {
-      console.log("HATA", error);
+      res.render("admin/adminhome", { msg: error });
     }
-  }else{
+  } else {
     res.render("login/giris.ejs");
   }
-
-
-
-
 });
 
-app.post("/admin/api/urunsil", function (req, res) {
-  Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
-    if (!err) {
-      res.redirect("/admin");
-    } else {
-      res.send({ sonuc: false });
-    }
-  });
+app.post("/admin/api/urunsil", async (req, res) => {
+  try {
+    Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
+      if (!err) {
+        res.redirect("/admin");
+      } else {
+        res.render("admin/adminhome", { isSuccess: false });
+      }
+    });
+  } catch (error) {
+    console.log("HATA", error);
+  }
 });
 
 // ADMIN //

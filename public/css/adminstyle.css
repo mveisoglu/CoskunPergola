@@ -1905,10 +1905,10 @@ html body .waves-notransition {
 .dropdown:hover .dropbtn {
   background-color: rgba(255, 255, 255, 0.452);
 }
-.admin-logout a{
+.admin-logout a {
   text-decoration: none;
-  color:white;
+  color: white;
 }
-.admin-logout a:hover{
+.admin-logout a:hover {
   font-weight: bolder;
 }

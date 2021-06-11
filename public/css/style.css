@@ -322,3 +322,14 @@ button {
 .icerik-yazi {
   font-size: 15px;
 }
+.resim1,
+.resim2,
+.resim3,
+.resim4 {
+  cursor: pointer;
+  max-height: 40vh;
+}
+.büyükresim {
+  max-height: 50vh;
+  height: 50vh;
+}
