@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname + "/public/resimler");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + ".jpg");
+    cb(null, file.fieldname + "-" + Date.now() + ".jpg");
   },
 });
 
