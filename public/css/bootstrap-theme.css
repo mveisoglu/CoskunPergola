@@ -78,3 +78,15 @@
   content: "]";
 }
 
+.modal-body .row{
+  width: 100%;
+  height: 100%;
+}
+.modal-body img{
+  text-align: left;
+}
+
+.modal-body p{
+  font-size: medium;
+  text-align: center;
+}
