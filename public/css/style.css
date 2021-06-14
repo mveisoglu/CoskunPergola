@@ -311,7 +311,7 @@ footer {
   padding: 3rem;
   text-align: center;
   width: 70%;
-  color: rgb(138, 137, 137);
+  color: rgb(255, 255, 255);
 }
 
 @media (max-width: 992px) {
@@ -321,7 +321,7 @@ footer {
 }
 
 footer a {
-  color: rgb(156, 155, 155);
+  color: rgb(209, 209, 209);
 }
 
 footer a:hover {
@@ -359,4 +359,9 @@ button {
 .büyükresim {
   max-height: 50vh;
   height: 50vh;
+}
+
+.urun button img{
+  width: 250px;
+  height: 170px;
 }
