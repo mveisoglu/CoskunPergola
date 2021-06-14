@@ -360,3 +360,8 @@ button {
   max-height: 50vh;
   height: 50vh;
 }
+
+.urun button img{
+  width: 250px;
+  height: 170px;
+}
