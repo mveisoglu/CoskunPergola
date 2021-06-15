@@ -84,6 +84,8 @@
 }
 .modal-body img{
   text-align: left;
+  width: 920px;
+  height: 750px;
 }
 
 .modal-body p{

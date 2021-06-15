@@ -330,8 +330,8 @@ footer a:hover {
 /* FOOTER */
 
 .modal-content {
-  background-color: rgba(0, 0, 0, 0.904);
-  color: rgb(211, 222, 231);
+  background-color: rgba(163, 163, 163, 0.753);
+  color: rgb(0, 0, 0);
 }
 
 .modal-dialog {
