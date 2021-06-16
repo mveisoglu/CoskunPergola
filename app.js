@@ -9,13 +9,6 @@ const session = require("express-session");
 const multer = require("multer");
 var fs = require("fs");
 var resimArrayi = [];
-var removeFile = function (err) {
-  if (err) {
-    console.log("unlink failed", err);
-  } else {
-    console.log("file deleted");
-  }
-};
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -187,7 +180,7 @@ app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
   var resimLinki6 = "";
 
   try {
-    if (req.files.length > 6) throw "Lütfen En Fazla 4 Adet Resim Ekleyin !";
+    if (req.files.length > 6) throw "Lütfen En Fazla 6 Adet Resim Ekleyin !";
     else if (
       req.files[0] &&
       req.files[1] &&
@@ -309,17 +302,15 @@ app.get("/admin", async (req, res) => {
 
 app.post("/admin/api/urunsil", async (req, res) => {
   try {
-    //  test123.forEach((element) => {
-    //   console.log("elementler", element);
-    //   fs.unlink(`${element}`, removeFile);
-    // });
     for (let i = 0; i < resimArrayi.length; i++) {
-      await fs.unlink(resimArrayi[i], removeFile);
+      await fs.unlink(resimArrayi[i], (err) => {
+        if (err) {
+          console.log("unlink failed", err);
+        } else {
+          console.log("file deleted");
+        }
+      });
     }
-    // _.map(yourArray,(files)=>{
-    //   fs.unlink('filepath', removeFile);
-    // });
-
     Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
       if (!err) {
         res.redirect("/admin");

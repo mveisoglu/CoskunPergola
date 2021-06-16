@@ -1,7 +1,7 @@
-<div class="page-wrapper">
+<div class="page-wrapper container-fluid">
   <div class="page-breadcrumb">
     <div class="row align-items-center">
-      <div class="col-5">
+      <div class="col-12">
         <h4 class="page-title">Yeni Proje Ekle</h4>
         <div class="d-flex align-items-center">
           <nav aria-label="breadcrumb">
@@ -16,11 +16,11 @@
           </nav>
         </div>
       </div>
-      <div class="col-7"></div>
     </div>
   </div>
+
   <div class="row">
-    <main role="main" class="col pt-3">
+    <main role="main  " class="pt-3">
       <div class="p-3">
         <!-- FORM BAŞLANIGIC -->
         <form
@@ -29,7 +29,7 @@
           enctype="multipart/form-data"
         >
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="row mb-2">
                 <div class="col">
                   <input
@@ -91,9 +91,10 @@
 
               <hr class="p-0 mt-2" />
             </div>
+
             <div
               class="
-                col-md-4
+                col-md-5
                 position-relative
                 p-2
                 bg-light
@@ -104,7 +105,7 @@
               "
             >
               <div>
-                <strong>Resim Ekle</strong>
+                <strong class="p-1">Resim Ekle</strong>
                 <div
                   class="
                     col
@@ -149,6 +150,7 @@
     </main>
   </div>
 </div>
+
 <script>
   var resimler = document.getElementById("dosya");
   var imageinput = document.getElementById("imageinput");
