@@ -7,13 +7,31 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
 const multer = require("multer");
+var fs = require("fs");
+var resimArrayi = [];
+var removeFile = function (err) {
+  if (err) {
+    console.log("unlink failed", err);
+  } else {
+    console.log("file deleted");
+  }
+};
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/public/resimler");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+    cb(null, file.fieldname + "-" + file.originalname + ".jpg");
+    resimArrayi.push(
+      __dirname +
+        "/public/resimler/" +
+        file.fieldname +
+        "-" +
+        file.originalname +
+        ".jpg"
+    );
+    console.log("resim adres uzantısı", resimArrayi);
   },
 });
 var upload = multer({ storage: storage });
@@ -291,6 +309,17 @@ app.get("/admin", async (req, res) => {
 
 app.post("/admin/api/urunsil", async (req, res) => {
   try {
+    //  test123.forEach((element) => {
+    //   console.log("elementler", element);
+    //   fs.unlink(`${element}`, removeFile);
+    // });
+    for (let i = 0; i < resimArrayi.length; i++) {
+      await fs.unlink(resimArrayi[i], removeFile);
+    }
+    // _.map(yourArray,(files)=>{
+    //   fs.unlink('filepath', removeFile);
+    // });
+
     Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
       if (!err) {
         res.redirect("/admin");
@@ -301,6 +330,8 @@ app.post("/admin/api/urunsil", async (req, res) => {
   } catch (error) {
     console.log("HATA1234", error);
   }
+  resimArrayi = [];
+  console.log("ARRAY TEMİZLENDİMİ ?", resimArrayi);
 });
 
 // ADMIN //
