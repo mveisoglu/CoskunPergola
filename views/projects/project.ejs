@@ -46,6 +46,8 @@
               data-resim2="<%=item.resimler.iki%>"
               data-resim3="<%=item.resimler.uc%>"
               data-resim4="<%=item.resimler.dort%>"
+              data-resim5="<%=item.resimler.bes%>"
+              data-resim6="<%=item.resimler.alti%>"
             >
               <img
                 src="<%=item.resimler.bir%>"
@@ -93,7 +95,7 @@
                         src="1"
                         alt="Bioclimatic Pergola"
                         class="büyükresim img-thumbnail"
-                        id="onbes"
+                        id="on"
                       />
                     </div>
 
@@ -204,7 +206,7 @@
                           "
                         >
                           <img
-                            height="200"
+                            height="auto"
                             width="100%"
                             class="rounded resim1"
                             src="1"
@@ -223,7 +225,7 @@
                           "
                         >
                           <img
-                            height="200"
+                            height="auto"
                             width="100%"
                             class="rounded resim2"
                             id="oniki"
@@ -242,7 +244,7 @@
                           "
                         >
                           <img
-                            height="200"
+                            height="auto"
                             width="100%"
                             class="rounded resim3"
                             id="onuc"
@@ -262,11 +264,50 @@
                           "
                         >
                           <img
-                            height="200"
+                            height="auto"
                             width="100%"
                             class="rounded resim4"
                             id="ondort"
                             src="4"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="auto"
+                            width="100%"
+                            class="rounded resim5"
+                            id="onbes"
+                            src="5"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            p-2
+                          "
+                        >
+                          <img
+                            height="auto"
+                            width="100%"
+                            class="rounded resim6"
+                            id="onalti"
+                            src="6"
                             alt=""
                           />
                         </div>
@@ -286,10 +327,12 @@
   var butonresim = document.querySelectorAll(".hepsi");
 
   butonresim.forEach((element) => {
-    var resim1 = element.dataset.resim1;
-    var resim2 = element.dataset.resim2;
-    var resim3 = element.dataset.resim3;
-    var resim4 = element.dataset.resim4;
+    // var resim1 = element.dataset.resim1;
+    // var resim2 = element.dataset.resim2;
+    // var resim3 = element.dataset.resim3;
+    // var resim4 = element.dataset.resim4;
+    // var resim5 = element.dataset.resim5;
+    // var resim6 = element.dataset.resim6;
 
     var title = element.dataset.title;
     var description = element.dataset.description;
@@ -309,37 +352,47 @@
       place.innerHTML = projeyeri;
       projetype.innerHTML = projetipi;
 
+      var resim0 = document.querySelector("#on");
       var resim1 = document.querySelector(".resim1");
       var resim2 = document.querySelector(".resim2");
       var resim3 = document.querySelector(".resim3");
       var resim4 = document.querySelector(".resim4");
-      var resim5 = document.querySelector(".büyükresim");
+      var resim5 = document.querySelector(".resim5");
+      var resim6 = document.querySelector(".resim6");
 
+      resim0.src = element.dataset.resim1;
       resim1.src = element.dataset.resim1;
       resim2.src = element.dataset.resim2;
       resim3.src = element.dataset.resim3;
       resim4.src = element.dataset.resim4;
-      resim5.src = element.dataset.resim1;
-      console.log("tiklandı");
+      resim5.src = element.dataset.resim5;
+      resim6.src = element.dataset.resim6;
     });
   });
-
+  var on = document.getElementById("on");
   var onbir = document.getElementById("onbir");
   var oniki = document.getElementById("oniki");
   var onuc = document.getElementById("onuc");
   var ondort = document.getElementById("ondort");
   var onbes = document.getElementById("onbes");
+  var onalti = document.getElementById("onalti");
 
   onbir.addEventListener("click", () => {
-    onbes.src = onbir.src;
+    on.src = onbir.src;
   });
   oniki.addEventListener("click", () => {
-    onbes.src = oniki.src;
+    on.src = oniki.src;
   });
   onuc.addEventListener("click", () => {
-    onbes.src = onuc.src;
+    on.src = onuc.src;
   });
   ondort.addEventListener("click", () => {
-    onbes.src = ondort.src;
+    on.src = ondort.src;
+  });
+  onbes.addEventListener("click", () => {
+    on.src = onbes.src;
+  });
+  onalti.addEventListener("click", () => {
+    on.src = onalti.src;
   });
 </script>

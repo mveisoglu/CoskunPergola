@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div id="alert" class="alert alert-danger d-none" role="alert">
-                <strong>En fazla 4 adet resim yükleyebilirsiniz !</strong>
+                <strong>En fazla 6 adet resim yükleyebilirsiniz !</strong>
               </div>
               <div id="success" class="alert alert-info d-none" role="alert">
                 <strong id="content2"></strong>
@@ -157,7 +157,7 @@
   var deneme11 = document.getElementById("deneme11");
 
   resimler.addEventListener("change", function (e) {
-    if (e.target.files.length > 4) {
+    if (e.target.files.length > 6) {
       alert.classList.remove("d-none");
       imageinput.disabled = true;
       success.classList.add("d-none");
