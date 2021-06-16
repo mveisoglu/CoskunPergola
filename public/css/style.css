@@ -352,7 +352,8 @@ button {
 .resim5,
 .resim6 {
   cursor: pointer;
-  max-width: 100%;
+  width: 150px!important;
+  height: 150px!important;
   object-fit: contain;
 }
 .büyükresim {
@@ -367,11 +368,6 @@ button {
 
 .modal-body p {
   text-align: justify !important;
-}
-
-.modal-body img {
-  width: 150px !important;
-  height: 150px !important;
 }
 
 .modal-body #on {
