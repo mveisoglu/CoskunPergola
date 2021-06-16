@@ -16,9 +16,7 @@ var storage = multer.diskStorage({
     cb(null, file.fieldname + "-" + Date.now() + ".jpg");
   },
 });
-
 var upload = multer({ storage: storage });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
@@ -66,6 +64,8 @@ const projeSchema = new mongoose.Schema({
     iki: String,
     uc: String,
     dort: String,
+    bes: String,
+    alti: String,
   },
 });
 
@@ -165,39 +165,80 @@ app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
   var resimLinki2 = "";
   var resimLinki3 = "";
   var resimLinki4 = "";
+  var resimLinki5 = "";
+  var resimLinki6 = "";
 
   try {
-    if (req.files.length > 4) throw "Lütfen En Fazla 4 Adet Resim Ekleyin !";
-    else if (req.files[0] && req.files[1] && req.files[2] && req.files[3]) {
+    if (req.files.length > 6) throw "Lütfen En Fazla 4 Adet Resim Ekleyin !";
+    else if (
+      req.files[0] &&
+      req.files[1] &&
+      req.files[2] &&
+      req.files[3] &&
+      req.files[4] &&
+      req.files[5]
+    ) {
       resimLinki1 = "../resimler/" + req.files[0].filename;
       resimLinki2 = "../resimler/" + req.files[1].filename;
       resimLinki3 = "../resimler/" + req.files[2].filename;
       resimLinki4 = "../resimler/" + req.files[3].filename;
+      resimLinki5 = "../resimler/" + req.files[4].filename;
+      resimLinki6 = "../resimler/" + req.files[5].filename;
+    } else if (
+      req.files[0] &&
+      req.files[1] &&
+      req.files[2] &&
+      req.files[3] &&
+      req.files[4]
+    ) {
+      resimLinki1 = "../resimler/" + req.files[0].filename;
+      resimLinki2 = "../resimler/" + req.files[1].filename;
+      resimLinki3 = "../resimler/" + req.files[2].filename;
+      resimLinki4 = "../resimler/" + req.files[3].filename;
+      resimLinki5 = "../resimler/" + req.files[4].filename;
+      resimLinki6 = "";
+    } else if (req.files[0] && req.files[1] && req.files[2] && req.files[3]) {
+      resimLinki1 = "../resimler/" + req.files[0].filename;
+      resimLinki2 = "../resimler/" + req.files[1].filename;
+      resimLinki3 = "../resimler/" + req.files[2].filename;
+      resimLinki4 = "../resimler/" + req.files[3].filename;
+      resimLinki5 = "";
+      resimLinki6 = "";
     } else if (req.files[0] && req.files[1] && req.files[2]) {
       resimLinki1 = "../resimler/" + req.files[0].filename;
       resimLinki2 = "../resimler/" + req.files[1].filename;
       resimLinki3 = "../resimler/" + req.files[2].filename;
       resimLinki4 = "";
+      resimLinki5 = "";
+      resimLinki6 = "";
     } else if (req.files[0] && req.files[1]) {
       resimLinki1 = "../resimler/" + req.files[0].filename;
       resimLinki2 = "../resimler/" + req.files[1].filename;
       resimLinki3 = "";
       resimLinki4 = "";
-    } else if (!req.files[1] && !req.files[2] && !req.files[3]) {
+      resimLinki5 = "";
+      resimLinki6 = "";
+    } else if (req.files[0]) {
       resimLinki1 = "../resimler/" + req.files[0].filename;
       resimLinki2 = "";
       resimLinki3 = "";
       resimLinki4 = "";
+      resimLinki5 = "";
+      resimLinki6 = "";
     } else if (
       !req.files[0] &&
       !req.files[1] &&
       !req.files[2] &&
-      !req.files[3]
+      !req.files[3] &&
+      !req.files[5] &&
+      !req.files[6]
     ) {
       resimLinki1 = "";
       resimLinki2 = "";
       resimLinki3 = "";
       resimLinki4 = "";
+      resimLinki5 = "";
+      resimLinki6 = "";
     }
     var ekle = new Proje({
       title: req.body.title,
@@ -210,6 +251,8 @@ app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
         iki: resimLinki2,
         uc: resimLinki3,
         dort: resimLinki4,
+        bes: resimLinki5,
+        alti: resimLinki6,
       },
     });
     ekle.save((err) => {
@@ -256,7 +299,7 @@ app.post("/admin/api/urunsil", async (req, res) => {
       }
     });
   } catch (error) {
-    console.log("HATA", error);
+    console.log("HATA1234", error);
   }
 });
 

@@ -1,7 +1,7 @@
 /* COMMON */
 :root {
-  --color-primary: #64BBE3;
-  --color-primary-hover: #85CAE9;
+  --color-primary: #64bbe3;
+  --color-primary-hover: #85cae9;
   --color-primary-transparent: #b8e0f2a2;
 }
 
@@ -17,7 +17,6 @@ a:hover {
 .section-header {
   text-align: center;
   margin-bottom: 1rem;
-
 }
 
 .section-header h2 {
@@ -40,34 +39,30 @@ a:hover {
   transform: translate(-50%, 50%);
 }
 
-.section-biz .misyonumuz h3{
+.section-biz .misyonumuz h3 {
   border-top: 1px dotted var(--color-primary);
   border-bottom: 1px dotted var(--color-primary);
   display: inline-block;
   text-align: center;
   padding: 1rem 2rem;
   position: relative;
- 
 }
 
-
-.section-biz .vizyonumuz h3{
+.section-biz .vizyonumuz h3 {
   border-top: 1px dotted var(--color-primary);
   border-bottom: 1px dotted var(--color-primary);
   display: inline-block;
   text-align: center;
   padding: 1rem 2rem;
   position: relative;
- 
 }
 
-.section-biz .container{
+.section-biz .container {
   text-align: center;
 }
-.section-biz .container p{
+.section-biz .container p {
   text-align: left;
 }
-
 
 /* COMMON */
 
@@ -154,7 +149,7 @@ nav.navbar {
   background-color: var(--color-primary);
   padding: 1rem;
   font-size: 1.5rem;
-  color:black;
+  color: black;
   text-decoration: none;
   border-radius: 50%;
 }
@@ -352,16 +347,20 @@ button {
 .resim1,
 .resim2,
 .resim3,
-.resim4 {
+.resim4,
+.resim5,
+.resim6 {
   cursor: pointer;
-  max-height: 40vh;
+  max-height: 20vh;
+  max-width: 100%;
+  object-fit: contain;
 }
 .büyükresim {
   max-height: 50vh;
   height: 50vh;
 }
 
-.urun button img{
+.urun button img {
   width: 250px;
   height: 170px;
 }
