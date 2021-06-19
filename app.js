@@ -9,7 +9,6 @@ const session = require("express-session");
 const multer = require("multer");
 var fs = require("fs");
 var resimArrayi = [];
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/public/resimler");
@@ -24,7 +23,6 @@ var storage = multer.diskStorage({
         file.originalname +
         ".jpg"
     );
-    console.log("resim adres uzantısı", resimArrayi);
   },
 });
 var upload = multer({ storage: storage });
@@ -40,6 +38,10 @@ app.use(
     secret: "Coskun-Pergola",
     resave: true,
     saveUninitialized: true,
+    rolling: true,
+    cookie: {
+      maxAge: 180000 /*Cookie Süresi */,
+    },
   })
 );
 app.use(passport.initialize());
@@ -268,13 +270,13 @@ app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
     });
     ekle.save((err) => {
       if (err) {
-        res.redirect("/admin");
+        res.redirect("/");
       } else {
         res.redirect("/admin");
       }
     });
   } catch (error) {
-    res.redirect("/admin");
+    res.redirect("/");
   }
 });
 
