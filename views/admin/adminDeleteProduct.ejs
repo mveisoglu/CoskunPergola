@@ -11,10 +11,10 @@
         <AdminHeader />
         <div className="page-wrapper">
           <div className="page-breadcrumb">
-            <div className="row align-items-center">                       
+            <div className="row align-items-center">
             </div>
           </div>
-        
+
           <div id="urunsil" className="row shadow">
             <h3 class="text-center  btn-outline-primary d-flex align-items-center justify-content-center">ÜRÜN SİL</h3>
             <main role="main" className="col  bg-white mt-3 p-3">
@@ -22,7 +22,7 @@
                 <caption>Ürün Listesi</caption>
                 <thead>
                   <tr>
-                   
+
                     <th scope="col-sm-1">Başlık</th>
                     <th scope="col-sm-1">İçerik</th>
                     <th scope="col-sm-1">Proje Tipi</th>
@@ -36,16 +36,16 @@
                     <th scope="col-sm-1">Resim 6</th>
                   </tr>
                 </thead>
-              
 
-                <form action="/admin/api/urunsil" method="POST">
+
+                <form action="<%=api_sil%>" method="POST">
                 <% data.forEach(function(item){ %>
-                 
-                   
+
+
                 <tbody>
-                  
+
                       <tr>
-                        
+
                         <td  ><%=item.title %></td>
                         <td  ><%=item.content %></td>
                         <td ><%=item.projeTipi %></td>
@@ -68,10 +68,10 @@
                           >
                             Sil
                           </button>
-                          
+
                         </td>
                       </tr>
-                  
+
                 </tbody>
                 <% }) %>
               </form>
