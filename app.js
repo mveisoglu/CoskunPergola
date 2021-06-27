@@ -9,7 +9,6 @@ const session = require("express-session");
 const multer = require("multer");
 var fs = require("fs");
 var resimArrayi = [];
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/public/resimler");
@@ -24,7 +23,6 @@ var storage = multer.diskStorage({
         file.originalname +
         ".jpg"
     );
-    console.log("resim adres uzantısı", resimArrayi);
   },
 });
 var upload = multer({ storage: storage });
@@ -275,14 +273,18 @@ app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
     });
     ekle.save((err) => {
       if (err) {
+
         res.redirect("/cpadmin");
+
       } else {
           res.redirect("/cpadmin");
 
       }
     });
   } catch (error) {
+
     res.redirect("/cpadmin");
+
   }
 } else {
   res.render("login/giris.ejs");

@@ -53,45 +53,22 @@
      <%- include("adminLeftMenu"); -%>
      <%- include("AdminHeader"); -%>
 
-    <AdminHeader /> -->
-      <div class="page-wrapper">
-        <div class="page-breadcrumb">
-          <div class="row align-items-center">
-            <div class="col-5">
-              <h4 class="page-title" id="urunekle">Anasayfa</h4>
-              <div class="d-flex align-items-center">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="#">Anasayfa</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                      Panel
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-            <div class="col-7"></div>
-          </div>
+    
+    <div class="container-fluid" style="background-color: #eef5f9;">
+      <div class="container">
+        <div class="row">
+          <%- include("adminaddProduct"); -%>
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <%- include("adminaddProduct"); -%>
-          </div>
-
-          <div class="row">
+      </div>
+     
+      <div class="container">
+        <div class="row">
 
           <%- include("adminDeleteProduct",{data:data}); -%>
           </div>
-        </div>
-        <div>
-
-        </div>
-        <footer class="footer text-center bg-white">
-© 2021 CoskunPergola - Her hakkı saklıdır.
-        </footer>
-        </div>
+      </div>
+      
+    </div>
 
 
       </div>

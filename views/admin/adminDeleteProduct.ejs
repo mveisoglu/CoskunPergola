@@ -1,12 +1,28 @@
 <div
-        id="main-wrapper"
-        data-layout="vertical"
-        data-navbarbg="skin5"
-        data-sidebartype="full"
-        data-sidebar-position="absolute"
-        data-header-position="absolute"
-        data-boxed-layout="full"
+  id="main-wrapper"
+  data-layout="vertical"
+  data-navbarbg="skin5"
+  data-sidebartype="full"
+  data-sidebar-position="absolute"
+  data-header-position="absolute"
+  data-boxed-layout="full"
+>
+  <div className="page-wrapper">
+    <div className="page-breadcrumb">
+      <div className="row align-items-center"></div>
+    </div>
+
+    <div id="urunsil" className="row shadow">
+      <h3
+        class="
+          text-center
+          btn-outline-primary
+          d-flex
+          align-items-center
+          justify-content-center
+        "
       >
+
         <AdminLeftMenu />
         <AdminHeader />
         <div className="page-wrapper">
@@ -52,11 +68,11 @@
                         <td ><%=item.projeYeri %></td>
                         <td ><%=item.musteri %></td>
                         <td  style="max-width: 15px;" class="overflow-auto"><%=item.resimler.bir %></td>
-                        <td ><%=item.resimler.iki %></td>
-                        <td ><%=item.resimler.uc %></td>
-                        <td ><%=item.resimler.dort %></td>
-                        <td ><%=item.resimler.bes %></td>
-                        <td ><%=item.resimler.alti %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.iki %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.uc %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.dort %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.bes %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.alti %></td>
                         <td>
                           <button
                             onClick=""
