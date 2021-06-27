@@ -1,17 +1,13 @@
 <section id="projeler" class="plans bg-secondary">
-  <div class="section-header"><h2>Projeler</h2></div>
+  <div class="section-header">
+    <h2>Projeler</h2>
+  </div>
 
   <div class="tab-content" id="pills-plan">
-    <div
-      class="tab-pane fade show active"
-      id="pills-apartman-plan"
-      role="tabpanel"
-    >
+    <div class="tab-pane fade show active" id="pills-apartman-plan" role="tabpanel">
       <div class="row g-3">
         <% data.forEach(function(item){ %>
-        <div
-          style="max-width: 200px"
-          class="
+          <div style="max-width: 200px" class="
             col-sm-4
             shadow
             rounded
@@ -24,256 +20,172 @@
             px-2
             my-2
             mx-4
-          "
-        >
-          <!-- Button trigger modal -->
+          ">
+            <!-- Button trigger modal -->
 
-          <button type="button" data-bs-toggle="modal" data-bs-target="#deneme">
-            <div
-              class="
+            <button type="button" data-bs-toggle="modal" data-bs-target="#deneme">
+              <div class="
                 d-flex
                 flex-column
                 align-items-center
                 justify-content-center
                 hepsi
-              "
-              data-title="<%=item.title%>"
-              data-description="<%=item.content%>"
-              data-musteri="<%=item.musteri%>"
-              data-projeyeri="<%=item.projeYeri%>"
-              data-projetipi="<%=item.projeTipi%>"
-              data-resim1="<%=item.resimler.bir%>"
-              data-resim2="<%=item.resimler.iki%>"
-              data-resim3="<%=item.resimler.uc%>"
-              data-resim4="<%=item.resimler.dort%>"
-              data-resim5="<%=item.resimler.bes%>"
-              data-resim6="<%=item.resimler.alti%>"
-            >
-              <img
-                src="<%=item.resimler.bir%>"
-                alt="Rolling Roof"
-                class="rounded shadow firstpicture"
-                style="max-height: 200px; max-width: 150px"
-              />
-              <div class="my-2 h5 w-75"><%=item.title%></div>
-            </div>
-          </button>
-        </div>
-        <!-- Modal -->
-        <% }) %>
-        <div
-          class="modal fade"
-          id="deneme"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content" style="max-height: 100%">
-              <div class="modal-header">
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+              " data-title="<%=item.title%>" data-description="<%=item.content%>" data-musteri="<%=item.musteri%>"
+                data-projeyeri="<%=item.projeYeri%>" data-projetipi="<%=item.projeTipi%>"
+                data-resim1="<%=item.resimler.bir%>" data-resim2="<%=item.resimler.iki%>"
+                data-resim3="<%=item.resimler.uc%>" data-resim4="<%=item.resimler.dort%>"
+                data-resim5="<%=item.resimler.bes%>" data-resim6="<%=item.resimler.alti%>">
+                <img src="<%=item.resimler.bir%>" alt="Rolling Roof" class="rounded shadow firstpicture"
+                  style="max-height: 200px; max-width: 150px" />
+                <div class="my-2 h5 w-75">
+                  <%=item.title%>
+                </div>
               </div>
-              <div id="project" class="modal-body d-flex align-items-center">
-                <div class="">
-                  <div class="row">
-                    <div
-                      class="
+            </button>
+          </div>
+          <!-- Modal -->
+          <% }) %>
+            <div class="modal fade" id="deneme" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content" style="max-height: 100%">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div id="project" class="modal-body d-flex align-items-center">
+                    <div class="">
+                      <div class="row">
+                        <div class="
                         col-md-4
                         d-flex
                         justify-content-center
                         align-items-center
-                      "
-                    >
-                      <img
-                        src="1"
-                        alt="Bioclimatic Pergola"
-                        class="büyükresim img-thumbnail"
-                        id="on"
-                      />
-                    </div>
+                      ">
+                          <img src="1" alt="Bioclimatic Pergola" class="büyükresim img-thumbnail" id="on" />
+                        </div>
 
-                    <div class="col-md-4 pt">
-                      <div class="col-sm-12">
-                        <strong
-                          id="title"
-                          class="text-center d-flex justify-content-center"
-                        >
-                        </strong>
-                        <p class="mt-5 icerik-yazi">
-                          İÇERİK :
-                          <span class="text-dark mx-3" id="content"></span>
-                        </p>
+                        <div class="col-md-4 pt">
+                          <div class="col-sm-12">
+                            <strong id="title" class="text-center d-flex justify-content-center">
+                            </strong>
+                            <p class="mt-5 icerik-yazi">
+                              İÇERİK :
+                              <span class="text-dark mx-3" id="content"></span>
+                            </p>
 
-                        <p class="mt-3 icerik-yazi">
-                          PROJE YERİ:
-                          <span class="text-dark mx-3" id="projeyeri"> </span>
-                        </p>
+                            <p class="mt-3 icerik-yazi">
+                              PROJE YERİ:
+                              <span class="text-dark mx-3" id="projeyeri"> </span>
+                            </p>
 
-                        <p class="mt-3 icerik-yazi">
-                          PROJE TİPİ:
-                          <span class="text-dark mx-3" id="projetipi"></span>
-                        </p>
+                            <p class="mt-3 icerik-yazi">
+                              PROJE TİPİ:
+                              <span class="text-dark mx-3" id="projetipi"></span>
+                            </p>
 
-                        <p class="mt-3 icerik-yazi">
-                          MÜŞTERİ:
-                          <span class="h5 text-dark mx-3" id="musteri"></span>
-                        </p>
+                            <p class="mt-3 icerik-yazi">
+                              MÜŞTERİ:
+                              <span class="h5 text-dark mx-3" id="musteri"></span>
+                            </p>
 
-                        <div class="col-sm-12">
-                          <P class="my-3">PROJELENDİRME</P>
-<div class="rating">
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-   </div>
-                           <P class="my-3">UYGULAMA </P>
-<div class="rating">
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-   </div>                  <P class="my-3">PROJE TAMAMLANDI </P>
-<div class="rating">
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-         <i class="rating__star fas fa-star"></i>
-   </div>                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 d-flex flex-wrap align-items-center justify-content-center">
-                      <div class="col-sm-12">
-                        <h3 class="text-center">İLGİLİ GÖRSELLER</h3>
-                      </div>
 
-                      <div class="col-sm-4">
-                        <div
-                          class="
+
+                            <div class="col-sm-12">
+                              <P class="my-3">PROJELENDİRME</P>
+                              <div class="rating">
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                              </div>
+                              <P class="my-3">UYGULAMA </P>
+                              <div class="rating">
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                              </div>
+                              <P class="my-3">PROJE TAMAMLANDI </P>
+                              <div class="rating">
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                                <i class="rating__star fas fa-star"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 d-flex flex-wrap align-items-center justify-content-center">
+                          <div class="col-sm-12">
+                            <h3 class="text-center">İLGİLİ GÖRSELLER</h3>
+                          </div>
+
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim1"
-                            src="1"
-                            alt=""
-                            id="onbir"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div
-                          class="
+                          ">
+                              <img height="100%" width="100%" class="rounded resim1" src="1" alt="" id="onbir" />
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim2"
-                            id="oniki"
-                            src="2"
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div
-                          class="
+                          ">
+                              <img height="100%" width="100%" class="rounded resim2" id="oniki" src="2" alt="" />
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim3"
-                            id="onuc"
-                            src="3"
-                            alt=""
-                          />
-                        </div>
-                      </div>
+                          ">
+                              <img height="100%" width="100%" class="rounded resim3" id="onuc" src="3" alt="" />
+                            </div>
+                          </div>
 
-                      <div class="col-sm-4">
-                        <div
-                          class="
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim4"
-                            id="ondort"
-                            src="4"
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div
-                          class="
+                          ">
+                              <img height="100%" width="100%" class="rounded resim4" id="ondort" src="4" alt="" />
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim5"
-                            id="onbes"
-                            src="5"
-                            alt=""
-                          />
-                        </div>
-                      </div>
+                          ">
+                              <img height="100%" width="100%" class="rounded resim5" id="onbes" src="5" alt="" />
+                            </div>
+                          </div>
 
-                      <div class="col-sm-4">
-                        <div
-                          class="
+                          <div class="col-sm-4">
+                            <div class="
                             d-flex
                             align-items-center
                             justify-content-center
                             p-2
-                          "
-                        >
-                          <img
-                            height="100%"
-                            width="100%"
-                            class="rounded resim6"
-                            id="onalti"
-                            src="6"
-                            alt=""
-                          />
+                          ">
+                              <img height="100%" width="100%" class="rounded resim6" id="onalti" src="6" alt="" />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
 
                       </div>
@@ -283,10 +195,10 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
 </section>
 <script>
@@ -326,6 +238,26 @@
       var resim5 = document.querySelector(".resim5");
       var resim6 = document.querySelector(".resim6");
 
+
+      if (element.dataset.resim1 == "") {
+        resim1.classList.add("d-none");
+      }
+      if (element.dataset.resim2 == "") {
+        resim2.classList.add("d-none");
+      }
+      if (element.dataset.resim3 == "") {
+        resim3.classList.add("d-none");
+      }
+      if (element.dataset.resim4 == "") {
+        resim4.classList.add("d-none");
+      }
+      if (element.dataset.resim5 == "") {
+        resim5.classList.add("d-none");
+      }
+      if (element.dataset.resim6 == "") {
+        resim6.classList.add("d-none");
+      }
+
       resim0.src = element.dataset.resim1;
       resim1.src = element.dataset.resim1;
       resim2.src = element.dataset.resim2;
@@ -333,6 +265,9 @@
       resim4.src = element.dataset.resim4;
       resim5.src = element.dataset.resim5;
       resim6.src = element.dataset.resim6;
+
+
+
     });
   });
   var on = document.getElementById("on");

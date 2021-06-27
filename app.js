@@ -115,7 +115,7 @@ app.get("/", (req, res) => {
     Proje.find({}, (err, gelenVeri) => {
       if (err) throw err;
       else {
-        res.render("home", { data: gelenVeri });
+        res.render("home", { data: gelenVeri , contact_form:process.env.CONTACT});
       }
     });
   } catch (error) {
@@ -125,7 +125,7 @@ app.get("/", (req, res) => {
 
 //LOGIN//
 //Kullanıcı oluşturma//
-app.post("/api/kullaniciolusturma", function (req, res) {
+app.post(process.env.KULLANICI_KAYIT, function (req, res) {
   Kullanici.register(
     {
       username: req.body.username,
@@ -156,11 +156,11 @@ app.post("/girisyap", function (req, res) {
       res.render("login/giris.ejs");
     } else {
       passport.authenticate("local", {
-        successRedirect: "/admin",
+        successRedirect: "/cpadmin",
         failureRedirect: "/",
         failureFlash: true,
       })(req, res, function () {
-        res.redirect("/admin");
+        res.redirect("/cpadmin");
       });
     }
   });
@@ -173,7 +173,10 @@ app.get("/cikisyap", function (req, res) {
 });
 // ADMIN//
 
-app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
+app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
+  var api_ekle=process.env.URUN_EKLE;
+  if (req.isAuthenticated()) {
+
   var resimLinki1 = "";
   var resimLinki2 = "";
   var resimLinki3 = "";
@@ -270,17 +273,25 @@ app.post("/admin/proje/ekle", upload.array("dosya", 20), (req, res) => {
     });
     ekle.save((err) => {
       if (err) {
-        res.redirect("/");
+
+        res.redirect("/cpadmin");
+
       } else {
-        res.redirect("/admin");
+          res.redirect("/cpadmin");
+
       }
     });
   } catch (error) {
-    res.redirect("/");
+
+    res.redirect("/cpadmin");
+
   }
+} else {
+  res.render("login/giris.ejs");
+}
 });
 
-app.get("/admin", async (req, res) => {
+app.get("/cpadmin", async (req, res) => {
   if (req.isAuthenticated()) {
     // eğer giriş yapılmışsa
     try {
@@ -288,6 +299,8 @@ app.get("/admin", async (req, res) => {
         if (err) throw err;
         else {
           res.render("admin/adminHome", {
+            api_ekle:process.env.URUN_EKLE,
+            api_sil:process.env.URUN_SIL,
             data: gelenVeri,
             isSuccess: true,
             msg: "ok",
@@ -302,7 +315,8 @@ app.get("/admin", async (req, res) => {
   }
 });
 
-app.post("/admin/api/urunsil", async (req, res) => {
+app.post(process.env.URUN_SIL, async (req, res) => {
+  if (req.isAuthenticated()) {
   try {
     for (let i = 0; i < resimArrayi.length; i++) {
       await fs.unlink(resimArrayi[i], (err) => {
@@ -315,7 +329,7 @@ app.post("/admin/api/urunsil", async (req, res) => {
     }
     Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
       if (!err) {
-        res.redirect("/admin");
+        res.redirect("/cpadmin");
       } else {
         res.render("admin/adminhome", { isSuccess: false });
       }
@@ -325,6 +339,9 @@ app.post("/admin/api/urunsil", async (req, res) => {
   }
   resimArrayi = [];
   console.log("ARRAY TEMİZLENDİMİ ?", resimArrayi);
+} else {
+  res.render("login/giris.ejs");
+}
 });
 
 // ADMIN //
