@@ -24,45 +24,73 @@
                 </thead>
 
 
-                <form action="<%=api_sil%>" method="POST">
-                <% data.forEach(function(item){ %>
-
+              
+                <% for(var i=0 ; i<data.length; i++) {%>
+                  <form action="<%=api_sil%>" method="POST">
 
                 <tbody>
 
                       <tr>
 
-                        <td  ><%=item.title %></td>
-                        <td  ><%=item.content %></td>
-                        <td ><%=item.projeTipi %></td>
-                        <td ><%=item.projeYeri %></td>
-                        <td ><%=item.musteri %></td>
-                        <td  style="max-width: 15px;" class="overflow-auto"><%=item.resimler.bir %></td>
-                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.iki %></td>
-                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.uc %></td>
-                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.dort %></td>
-                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.bes %></td>
-                        <td style="max-width: 15px" class="overflow-auto"><%=item.resimler.alti %></td>
-                        <td>
-                          <button
-                            onClick=""
-                            id=""
-                            value="<%=item._id %>"
-                            name="id"
-                            type="submit"
-                            class="btn btn-danger"
-                          >
-                            Sil
-                          </button>
-
-                        </td>
+                        <td ><%=data[i].title %></td>
+                        <td  ><%=data[i].content %></td>
+                        <td ><%=data[i].projeTipi %></td>
+                        <td ><%=data[i].projeYeri %></td>
+                        <td ><%=data[i].musteri %></td>
+                        <td style="max-width: 15px;" class="overflow-auto"><%=data[i].resimler.bir %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.iki %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.uc %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.dort %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.bes %></td>
+                        <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.alti %></td>
                       </tr>
+                       <tr></tr>
+                          
+                     
+                      </tbody>
 
-                </tbody>
-                <% }) %>
+                     
+                     <div>
+                       <input class="d-none" type="text" name="resim1" value="<%=data[i].resimler.bir %>">
+                       <input class="d-none" type="text" name="resim2" value="<%=data[i].resimler.iki %>">
+                       <input class="d-none" type="text" name="resim3" value="<%=data[i].resimler.uc %>">
+                       <input class="d-none" type="text" name="resim4" value="<%=data[i].resimler.dort %>">
+                       <input class="d-none" type="text" name="resim5" value="<%=data[i].resimler.bes %>">
+                       <input class="d-none" type="text" name="resim6" value="<%=data[i].resimler.alti %>">                         
+                      <button                          
+                      value="<%=data[i]._id %>"
+                      name="id"
+                        type="submit"
+                        class="btn btn-danger "                       
+                      >                                          
+                        Sil                       
+                      </button>                   
+                     </div>
+                     <div class="container">
+                       <div class="row">
+                      <ul class="d-flex justify-content-between" style="list-style-type:none">
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                      </ul>
+                      <li></li>
+                    </div>
+                    </div>
+                   
+                      
+                     
+                
               </form>
+            
+                <% } %>
+              
               </table>
+             
             </main>
+           
           </div>
         </div>
       </div>
