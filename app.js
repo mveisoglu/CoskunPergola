@@ -8,21 +8,12 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
 const multer = require("multer");
 var fs = require("fs");
-var resimArrayi = [];
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/public/resimler");
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + "-" + file.originalname + ".jpg");
-    resimArrayi.push(
-      __dirname +
-        "/public/resimler/" +
-        file.fieldname +
-        "-" +
-        file.originalname +
-        ".jpg"
-    );
   },
 });
 var upload = multer({ storage: storage });
@@ -40,7 +31,7 @@ app.use(
     saveUninitialized: true,
     rolling: true,
     cookie: {
-      maxAge: 180000 /*Cookie Süresi */,
+      maxAge: 300000 /*Cookie Süresi */,
     },
   })
 );
@@ -115,7 +106,10 @@ app.get("/", (req, res) => {
     Proje.find({}, (err, gelenVeri) => {
       if (err) throw err;
       else {
-        res.render("home", { data: gelenVeri , contact_form:process.env.CONTACT});
+        res.render("home", {
+          data: gelenVeri,
+          contact_form: process.env.CONTACT,
+        });
       }
     });
   } catch (error) {
@@ -174,121 +168,115 @@ app.get("/cikisyap", function (req, res) {
 // ADMIN//
 
 app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
-  var api_ekle=process.env.URUN_EKLE;
+  var api_ekle = process.env.URUN_EKLE;
   if (req.isAuthenticated()) {
+    var resimLinki1 = "";
+    var resimLinki2 = "";
+    var resimLinki3 = "";
+    var resimLinki4 = "";
+    var resimLinki5 = "";
+    var resimLinki6 = "";
 
-  var resimLinki1 = "";
-  var resimLinki2 = "";
-  var resimLinki3 = "";
-  var resimLinki4 = "";
-  var resimLinki5 = "";
-  var resimLinki6 = "";
-
-  try {
-    if (req.files.length > 6) throw "Lütfen En Fazla 6 Adet Resim Ekleyin !";
-    else if (
-      req.files[0] &&
-      req.files[1] &&
-      req.files[2] &&
-      req.files[3] &&
-      req.files[4] &&
-      req.files[5]
-    ) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "../resimler/" + req.files[1].filename;
-      resimLinki3 = "../resimler/" + req.files[2].filename;
-      resimLinki4 = "../resimler/" + req.files[3].filename;
-      resimLinki5 = "../resimler/" + req.files[4].filename;
-      resimLinki6 = "../resimler/" + req.files[5].filename;
-    } else if (
-      req.files[0] &&
-      req.files[1] &&
-      req.files[2] &&
-      req.files[3] &&
-      req.files[4]
-    ) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "../resimler/" + req.files[1].filename;
-      resimLinki3 = "../resimler/" + req.files[2].filename;
-      resimLinki4 = "../resimler/" + req.files[3].filename;
-      resimLinki5 = "../resimler/" + req.files[4].filename;
-      resimLinki6 = "";
-    } else if (req.files[0] && req.files[1] && req.files[2] && req.files[3]) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "../resimler/" + req.files[1].filename;
-      resimLinki3 = "../resimler/" + req.files[2].filename;
-      resimLinki4 = "../resimler/" + req.files[3].filename;
-      resimLinki5 = "";
-      resimLinki6 = "";
-    } else if (req.files[0] && req.files[1] && req.files[2]) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "../resimler/" + req.files[1].filename;
-      resimLinki3 = "../resimler/" + req.files[2].filename;
-      resimLinki4 = "";
-      resimLinki5 = "";
-      resimLinki6 = "";
-    } else if (req.files[0] && req.files[1]) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "../resimler/" + req.files[1].filename;
-      resimLinki3 = "";
-      resimLinki4 = "";
-      resimLinki5 = "";
-      resimLinki6 = "";
-    } else if (req.files[0]) {
-      resimLinki1 = "../resimler/" + req.files[0].filename;
-      resimLinki2 = "";
-      resimLinki3 = "";
-      resimLinki4 = "";
-      resimLinki5 = "";
-      resimLinki6 = "";
-    } else if (
-      !req.files[0] &&
-      !req.files[1] &&
-      !req.files[2] &&
-      !req.files[3] &&
-      !req.files[5] &&
-      !req.files[6]
-    ) {
-      resimLinki1 = "";
-      resimLinki2 = "";
-      resimLinki3 = "";
-      resimLinki4 = "";
-      resimLinki5 = "";
-      resimLinki6 = "";
-    }
-    var ekle = new Proje({
-      title: req.body.title,
-      content: req.body.content,
-      projeYeri: req.body.projeYeri,
-      projeTipi: req.body.projeTipi,
-      musteri: req.body.musteri,
-      resimler: {
-        bir: resimLinki1,
-        iki: resimLinki2,
-        uc: resimLinki3,
-        dort: resimLinki4,
-        bes: resimLinki5,
-        alti: resimLinki6,
-      },
-    });
-    ekle.save((err) => {
-      if (err) {
-
-        res.redirect("/cpadmin");
-
-      } else {
-          res.redirect("/cpadmin");
-
+    try {
+      if (req.files.length > 6) throw "Lütfen En Fazla 6 Adet Resim Ekleyin !";
+      else if (
+        req.files[0] &&
+        req.files[1] &&
+        req.files[2] &&
+        req.files[3] &&
+        req.files[4] &&
+        req.files[5]
+      ) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "../resimler/" + req.files[1].filename;
+        resimLinki3 = "../resimler/" + req.files[2].filename;
+        resimLinki4 = "../resimler/" + req.files[3].filename;
+        resimLinki5 = "../resimler/" + req.files[4].filename;
+        resimLinki6 = "../resimler/" + req.files[5].filename;
+      } else if (
+        req.files[0] &&
+        req.files[1] &&
+        req.files[2] &&
+        req.files[3] &&
+        req.files[4]
+      ) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "../resimler/" + req.files[1].filename;
+        resimLinki3 = "../resimler/" + req.files[2].filename;
+        resimLinki4 = "../resimler/" + req.files[3].filename;
+        resimLinki5 = "../resimler/" + req.files[4].filename;
+        resimLinki6 = "";
+      } else if (req.files[0] && req.files[1] && req.files[2] && req.files[3]) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "../resimler/" + req.files[1].filename;
+        resimLinki3 = "../resimler/" + req.files[2].filename;
+        resimLinki4 = "../resimler/" + req.files[3].filename;
+        resimLinki5 = "";
+        resimLinki6 = "";
+      } else if (req.files[0] && req.files[1] && req.files[2]) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "../resimler/" + req.files[1].filename;
+        resimLinki3 = "../resimler/" + req.files[2].filename;
+        resimLinki4 = "";
+        resimLinki5 = "";
+        resimLinki6 = "";
+      } else if (req.files[0] && req.files[1]) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "../resimler/" + req.files[1].filename;
+        resimLinki3 = "";
+        resimLinki4 = "";
+        resimLinki5 = "";
+        resimLinki6 = "";
+      } else if (req.files[0]) {
+        resimLinki1 = "../resimler/" + req.files[0].filename;
+        resimLinki2 = "";
+        resimLinki3 = "";
+        resimLinki4 = "";
+        resimLinki5 = "";
+        resimLinki6 = "";
+      } else if (
+        !req.files[0] &&
+        !req.files[1] &&
+        !req.files[2] &&
+        !req.files[3] &&
+        !req.files[5] &&
+        !req.files[6]
+      ) {
+        resimLinki1 = "";
+        resimLinki2 = "";
+        resimLinki3 = "";
+        resimLinki4 = "";
+        resimLinki5 = "";
+        resimLinki6 = "";
       }
-    });
-  } catch (error) {
-
-    res.redirect("/cpadmin");
-
+      var ekle = new Proje({
+        title: req.body.title,
+        content: req.body.content,
+        projeYeri: req.body.projeYeri,
+        projeTipi: req.body.projeTipi,
+        musteri: req.body.musteri,
+        resimler: {
+          bir: resimLinki1,
+          iki: resimLinki2,
+          uc: resimLinki3,
+          dort: resimLinki4,
+          bes: resimLinki5,
+          alti: resimLinki6,
+        },
+      });
+      ekle.save((err) => {
+        if (err) {
+          res.redirect("/cpadmin");
+        } else {
+          res.redirect("/cpadmin");
+        }
+      });
+    } catch (error) {
+      res.redirect("/cpadmin");
+    }
+  } else {
+    res.render("login/giris.ejs");
   }
-} else {
-  res.render("login/giris.ejs");
-}
 });
 
 app.get("/cpadmin", async (req, res) => {
@@ -299,8 +287,8 @@ app.get("/cpadmin", async (req, res) => {
         if (err) throw err;
         else {
           res.render("admin/adminHome", {
-            api_ekle:process.env.URUN_EKLE,
-            api_sil:process.env.URUN_SIL,
+            api_ekle: process.env.URUN_EKLE,
+            api_sil: process.env.URUN_SIL,
             data: gelenVeri,
             isSuccess: true,
             msg: "ok",
@@ -316,32 +304,49 @@ app.get("/cpadmin", async (req, res) => {
 });
 
 app.post(process.env.URUN_SIL, async (req, res) => {
+  var picture1 = req.body.resim1.split(".");
+  var picture2 = req.body.resim2.split(".");
+  var picture3 = req.body.resim3.split(".");
+  var picture4 = req.body.resim4.split(".");
+  var picture5 = req.body.resim5.split(".");
+  var picture6 = req.body.resim6.split(".");
+
+  var resim1 = "./public" + picture1[2] + "." + picture1[3] + ".jpg";
+  var resim2 = "./public" + picture2[2] + "." + picture2[3] + ".jpg";
+  var resim3 = "./public" + picture3[2] + "." + picture3[3] + ".jpg";
+  var resim4 = "./public" + picture4[2] + "." + picture4[3] + ".jpg";
+  var resim5 = "./public" + picture5[2] + "." + picture5[3] + ".jpg";
+  var resim6 = "./public" + picture6[2] + "." + picture6[3] + ".jpg";
+
+  var bosArray = [];
+  bosArray.push(resim1, resim2, resim3, resim4, resim5, resim6);
+
   if (req.isAuthenticated()) {
-  try {
-    for (let i = 0; i < resimArrayi.length; i++) {
-      await fs.unlink(resimArrayi[i], (err) => {
-        if (err) {
-          console.log("unlink failed", err);
+    try {
+      for (let i = 0; i < bosArray.length; i++) {
+        await fs.unlink(bosArray[i], (err) => {
+          if (err) {
+            console.log("unlink failed", err);
+          } else {
+            console.log("file deleted");
+          }
+        });
+      }
+      var bosArray = [];
+      Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
+        if (!err) {
+          res.redirect("/cpadmin");
         } else {
-          console.log("file deleted");
+          res.render("admin/adminhome", { isSuccess: false });
         }
       });
+    } catch (error) {
+      console.log("HATA1234", error);
     }
-    Proje.deleteOne({ _id: req.body.id }, function (err, gelenVeri) {
-      if (!err) {
-        res.redirect("/cpadmin");
-      } else {
-        res.render("admin/adminhome", { isSuccess: false });
-      }
-    });
-  } catch (error) {
-    console.log("HATA1234", error);
+    console.log("ARRAY TEMİZLENDİMİ ?", resimArrayi);
+  } else {
+    res.render("login/giris.ejs");
   }
-  resimArrayi = [];
-  console.log("ARRAY TEMİZLENDİMİ ?", resimArrayi);
-} else {
-  res.render("login/giris.ejs");
-}
 });
 
 // ADMIN //
