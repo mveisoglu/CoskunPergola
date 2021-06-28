@@ -1,5 +1,6 @@
 
-   
+<div class="page-wrapper container-fluid">
+  <div class="page-breadcrumb">
 
           <div id="urunsil" className="row shadow">
             <h5 class="text-center  btn-outline-primary d-flex align-items-center justify-content-center">ÜRÜN SİL</h5>
@@ -24,7 +25,7 @@
                 </thead>
 
 
-              
+
                 <% for(var i=0 ; i<data.length; i++) {%>
                   <form action="<%=api_sil%>" method="POST">
 
@@ -43,54 +44,46 @@
                         <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.dort %></td>
                         <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.bes %></td>
                         <td style="max-width: 15px" class="overflow-auto"><%=data[i].resimler.alti %></td>
+                        <td>
+                          <div>
+                            <input class="d-none" type="text" name="resim1" value="<%=data[i].resimler.bir %>">
+                            <input class="d-none" type="text" name="resim2" value="<%=data[i].resimler.iki %>">
+                            <input class="d-none" type="text" name="resim3" value="<%=data[i].resimler.uc %>">
+                            <input class="d-none" type="text" name="resim4" value="<%=data[i].resimler.dort %>">
+                            <input class="d-none" type="text" name="resim5" value="<%=data[i].resimler.bes %>">
+                            <input class="d-none" type="text" name="resim6" value="<%=data[i].resimler.alti %>">
+                           <button
+                           value="<%=data[i]._id %>"
+                           name="id"
+                             type="submit"
+                             class="btn btn-danger "
+                           >
+                             Sil
+                           </button>
+                          </div>
+                        </td>
                       </tr>
                        <tr></tr>
-                          
-                     
+
+
                       </tbody>
 
-                     
-                     <div>
-                       <input class="d-none" type="text" name="resim1" value="<%=data[i].resimler.bir %>">
-                       <input class="d-none" type="text" name="resim2" value="<%=data[i].resimler.iki %>">
-                       <input class="d-none" type="text" name="resim3" value="<%=data[i].resimler.uc %>">
-                       <input class="d-none" type="text" name="resim4" value="<%=data[i].resimler.dort %>">
-                       <input class="d-none" type="text" name="resim5" value="<%=data[i].resimler.bes %>">
-                       <input class="d-none" type="text" name="resim6" value="<%=data[i].resimler.alti %>">                         
-                      <button                          
-                      value="<%=data[i]._id %>"
-                      name="id"
-                        type="submit"
-                        class="btn btn-danger "                       
-                      >                                          
-                        Sil                       
-                      </button>                   
-                     </div>
-                     <div class="container">
-                       <div class="row">
-                      <ul class="d-flex justify-content-between" style="list-style-type:none">
-                        <li>1</li>
-                        <li>1</li>
-                        <li>1</li>
-                        <li>1</li>
-                        <li>1</li>
-                        <li>1</li>
-                      </ul>
-                      <li></li>
-                    </div>
-                    </div>
-                   
-                      
-                     
-                
+
+
+
+
+
+
               </form>
-            
+
                 <% } %>
-              
+
               </table>
-             
+
             </main>
-           
+
           </div>
         </div>
       </div>
+    </div>
+  </div>

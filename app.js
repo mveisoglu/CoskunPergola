@@ -13,7 +13,14 @@ var storage = multer.diskStorage({
     cb(null, __dirname + "/public/resimler");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + file.originalname + ".jpg");
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        file.originalname +
+        new Date().getMilliseconds() +
+        ".jpg"
+    );
   },
 });
 var upload = multer({ storage: storage });
@@ -21,9 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-
 //LOGIN İŞLEMLERİ///
-
 app.use(
   session({
     secret: "Coskun-Pergola",
@@ -38,7 +43,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 ///MONGOOSE///
-
 mongoose
   .connect(process.env.MONGO_BAGLANTI, {
     useNewUrlParser: true,
@@ -52,10 +56,8 @@ mongoose
   .catch((err) => {
     console.log("MONGOOSE HATA", err);
   });
-
 const Schema = mongoose.Schema;
 ///MONGOOSE///
-
 ///MONGOOSE ŞEMA///
 const projeSchema = new mongoose.Schema({
   title: String,
@@ -72,20 +74,15 @@ const projeSchema = new mongoose.Schema({
     alti: String,
   },
 });
-
 // lOGIN SHEMA//
 const uyeSemasi = new mongoose.Schema({
   username: String,
   sifre: String,
 });
-
 uyeSemasi.plugin(passportLocalMongoose);
-
 ///MONGOOSE ŞEMA///
-
 ///MONGOOSE MODEL///
 const Proje = mongoose.model("Proje", projeSchema);
-
 //uyeSemasi.plugin(encrypt, {secret : process.env.ANAHTAR , encryptedFields  : ['sifre'] });
 const Kullanici = new mongoose.model("Kullanici", uyeSemasi);
 passport.use(Kullanici.createStrategy());
@@ -99,7 +96,6 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
-
 ///MONGOOSE MODEL///
 app.get("/", (req, res) => {
   try {
@@ -116,7 +112,6 @@ app.get("/", (req, res) => {
     console.log("HATA", error);
   }
 });
-
 //LOGIN//
 //Kullanıcı oluşturma//
 app.post(process.env.KULLANICI_KAYIT, function (req, res) {
@@ -138,7 +133,6 @@ app.post(process.env.KULLANICI_KAYIT, function (req, res) {
     }
   );
 });
-
 app.post("/girisyap", function (req, res) {
   const kullanici = new Kullanici({
     username: req.body.username,
@@ -166,7 +160,6 @@ app.get("/cikisyap", function (req, res) {
   res.redirect("/");
 });
 // ADMIN//
-
 app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
   var api_ekle = process.env.URUN_EKLE;
   if (req.isAuthenticated()) {
@@ -176,7 +169,6 @@ app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
     var resimLinki4 = "";
     var resimLinki5 = "";
     var resimLinki6 = "";
-
     try {
       if (req.files.length > 6) throw "Lütfen En Fazla 6 Adet Resim Ekleyin !";
       else if (
@@ -278,7 +270,6 @@ app.post(process.env.URUN_EKLE, upload.array("dosya", 20), (req, res) => {
     res.render("login/giris.ejs");
   }
 });
-
 app.get("/cpadmin", async (req, res) => {
   if (req.isAuthenticated()) {
     // eğer giriş yapılmışsa
@@ -302,7 +293,6 @@ app.get("/cpadmin", async (req, res) => {
     res.render("login/giris.ejs");
   }
 });
-
 app.post(process.env.URUN_SIL, async (req, res) => {
   var picture1 = req.body.resim1.split(".");
   var picture2 = req.body.resim2.split(".");
@@ -310,17 +300,16 @@ app.post(process.env.URUN_SIL, async (req, res) => {
   var picture4 = req.body.resim4.split(".");
   var picture5 = req.body.resim5.split(".");
   var picture6 = req.body.resim6.split(".");
-
+  console.log(picture1, "picture1");
   var resim1 = "./public" + picture1[2] + "." + picture1[3] + ".jpg";
   var resim2 = "./public" + picture2[2] + "." + picture2[3] + ".jpg";
   var resim3 = "./public" + picture3[2] + "." + picture3[3] + ".jpg";
   var resim4 = "./public" + picture4[2] + "." + picture4[3] + ".jpg";
   var resim5 = "./public" + picture5[2] + "." + picture5[3] + ".jpg";
   var resim6 = "./public" + picture6[2] + "." + picture6[3] + ".jpg";
-
+  console.log(resim1, "RESİM1");
   var bosArray = [];
   bosArray.push(resim1, resim2, resim3, resim4, resim5, resim6);
-
   if (req.isAuthenticated()) {
     try {
       for (let i = 0; i < bosArray.length; i++) {
@@ -343,14 +332,11 @@ app.post(process.env.URUN_SIL, async (req, res) => {
     } catch (error) {
       console.log("HATA1234", error);
     }
-    console.log("ARRAY TEMİZLENDİMİ ?", resimArrayi);
   } else {
     res.render("login/giris.ejs");
   }
 });
-
 // ADMIN //
-
 app.listen(5000, () => {
   console.log("Server 5000 portunda çalışıyor");
 });
